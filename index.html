@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TREASURE CHOMPERS - Multiplayer Online Game</title>
+    <title>BRAIN BATTLE - Online Question Game</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Baloo+2:wght@700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&display=swap');
 
         * {
             margin: 0;
@@ -14,41 +14,18 @@
         }
 
         body {
-            font-family: 'Baloo 2', cursive;
+            font-family: 'Poppins', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            overflow: hidden;
-            height: 100vh;
-            width: 100vw;
-        }
-
-        /* Animated Background */
-        body::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: 
-                radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px),
-                radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-            background-position: 0 0, 25px 25px;
-            animation: backgroundMove 20s linear infinite;
-        }
-
-        @keyframes backgroundMove {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
         .screen {
             display: none;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 10;
+            min-height: 100vh;
+            padding: 40px 20px;
+            animation: fadeIn 0.3s ease;
         }
 
         .screen.active {
@@ -56,152 +33,128 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            animation: fadeIn 0.3s ease;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .game-title {
-            font-family: 'Fredoka', sans-serif;
-            font-size: 80px;
-            font-weight: 700;
-            color: #fff;
-            text-shadow: 
-                4px 4px 0 #ff6b9d,
-                8px 8px 0 #c44569,
-                0 0 40px rgba(255, 107, 157, 0.6);
+        .title {
+            font-size: 72px;
+            font-weight: 800;
+            text-align: center;
             margin-bottom: 20px;
-            animation: bounce 2s ease-in-out infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            text-shadow: 4px 4px 8px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #fff, #ffd700);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .subtitle {
-            font-size: 28px;
-            color: #ffeaa7;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-size: 24px;
+            text-align: center;
             margin-bottom: 40px;
-            animation: pulse 2s ease infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.8; }
-            50% { opacity: 1; }
+            opacity: 0.9;
         }
 
         .button {
-            background: linear-gradient(135deg, #ff6b9d, #c44569);
-            border: 4px solid #fff;
-            padding: 20px 50px;
-            font-size: 28px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border: none;
+            padding: 18px 45px;
+            font-size: 20px;
             font-weight: 700;
             color: white;
             cursor: pointer;
             border-radius: 50px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
             transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
             margin: 10px;
-            font-family: 'Baloo 2', cursive;
-            box-shadow: 0 8px 0 #95378d, 0 12px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 25px rgba(245, 87, 108, 0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 13px 0 #95378d, 0 17px 40px rgba(0,0,0,0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(245, 87, 108, 0.6);
         }
 
         .button:active {
             transform: translateY(0);
-            box-shadow: 0 3px 0 #95378d, 0 5px 10px rgba(0,0,0,0.3);
         }
 
         .button.secondary {
-            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
-            color: #2d3436;
-            box-shadow: 0 8px 0 #e17055, 0 12px 30px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
         }
 
         .button.secondary:hover {
-            box-shadow: 0 13px 0 #e17055, 0 17px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 12px 35px rgba(79, 172, 254, 0.6);
         }
 
-        .button.secondary:active {
-            box-shadow: 0 3px 0 #e17055, 0 5px 10px rgba(0,0,0,0.3);
+        .button.success {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
         }
 
-        .button.small {
-            padding: 12px 30px;
-            font-size: 20px;
+        .button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
         }
 
-        /* Character Selection */
-        .character-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            max-width: 900px;
-            margin: 30px 0;
-        }
-
-        .character-card {
-            background: rgba(255, 255, 255, 0.2);
-            border: 4px solid #fff;
-            border-radius: 20px;
-            padding: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-        }
-
-        .character-card:hover {
-            transform: translateY(-10px) scale(1.05);
-            background: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-        }
-
-        .character-card.selected {
-            border-color: #ffeaa7;
-            background: rgba(255, 234, 167, 0.3);
-            box-shadow: 0 0 30px rgba(255, 234, 167, 0.8);
-        }
-
-        .character-icon {
-            font-size: 80px;
-            margin-bottom: 10px;
-        }
-
-        .character-name {
-            font-size: 24px;
-            font-weight: 700;
-        }
-
-        /* Lobby System */
-        .lobby-container {
-            background: rgba(255, 255, 255, 0.2);
-            border: 4px solid #fff;
+        .container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
             border-radius: 30px;
             padding: 40px;
             max-width: 700px;
-            backdrop-filter: blur(10px);
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 18px 25px;
+            font-size: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+            transform: scale(1.02);
+        }
+
+        .input-field::placeholder {
+            color: #999;
+        }
+
+        textarea.input-field {
+            min-height: 120px;
+            resize: vertical;
+            font-family: 'Poppins', sans-serif;
         }
 
         .lobby-code {
-            background: rgba(0, 0, 0, 0.3);
-            border: 3px solid #ffeaa7;
-            border-radius: 15px;
-            padding: 20px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 3px solid #ffd700;
+            border-radius: 20px;
+            padding: 25px;
             font-size: 48px;
-            font-weight: 700;
-            letter-spacing: 8px;
-            color: #ffeaa7;
+            font-weight: 800;
             text-align: center;
+            color: #ffd700;
+            letter-spacing: 8px;
             margin: 20px 0;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
@@ -213,8 +166,8 @@
         }
 
         .player-item {
-            background: rgba(255, 255, 255, 0.3);
-            border: 3px solid #fff;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             border-radius: 15px;
             padding: 15px 20px;
             margin: 10px 0;
@@ -222,221 +175,239 @@
             justify-content: space-between;
             align-items: center;
             font-size: 20px;
+            font-weight: 600;
         }
 
         .player-item.ready {
-            border-color: #00ff00;
-            background: rgba(0, 255, 0, 0.2);
+            border-color: #43e97b;
+            background: rgba(67, 233, 123, 0.2);
         }
 
         .ready-badge {
-            padding: 5px 15px;
+            padding: 6px 16px;
             border-radius: 20px;
-            font-weight: 700;
             font-size: 16px;
+            font-weight: 700;
         }
 
         .ready-badge.ready {
-            background: #00ff00;
+            background: #43e97b;
             color: #000;
         }
 
         .ready-badge.waiting {
-            background: #ffff00;
+            background: #ffd700;
             color: #000;
         }
 
-        .input-field {
+        .game-container {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 30px;
+            padding: 40px;
+            max-width: 900px;
             width: 100%;
-            padding: 15px 20px;
-            font-size: 24px;
-            background: rgba(255, 255, 255, 0.9);
-            border: 3px solid #fff;
-            border-radius: 15px;
-            font-family: 'Baloo 2', cursive;
-            font-weight: 700;
-            margin: 15px 0;
-            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
         }
 
-        .input-field:focus {
-            outline: none;
-            border-color: #ffeaa7;
-            box-shadow: 0 0 20px rgba(255, 234, 167, 0.5);
-        }
-
-        /* Game Canvas */
-        #gameCanvas {
-            border: 6px solid #fff;
-            border-radius: 20px;
-            box-shadow: 0 10px 50px rgba(0,0,0,0.5);
-            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-        }
-
-        /* Game HUD */
-        .game-hud {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            right: 20px;
-            display: flex;
-            justify-content: space-between;
-            z-index: 100;
-            pointer-events: none;
-        }
-
-        .score-display {
-            background: rgba(0, 0, 0, 0.7);
-            border: 4px solid #ffeaa7;
-            border-radius: 20px;
-            padding: 15px 30px;
-            font-size: 32px;
-            font-weight: 700;
-            color: #ffeaa7;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .timer-display {
-            background: rgba(0, 0, 0, 0.7);
-            border: 4px solid #ff6b9d;
-            border-radius: 20px;
-            padding: 15px 30px;
-            font-size: 32px;
-            font-weight: 700;
-            color: #ff6b9d;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
-
-        .player-scores {
-            position: absolute;
-            top: 100px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            border: 4px solid #fff;
-            border-radius: 20px;
+        .turn-indicator {
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #000;
             padding: 20px;
-            min-width: 250px;
-            z-index: 100;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            gap: 20px;
         }
 
         .score-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px;
-            margin: 5px 0;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-        }
-
-        .score-item.you {
-            border: 2px solid #ffeaa7;
-        }
-
-        /* Mobile Controls */
-        .mobile-controls {
-            position: absolute;
-            bottom: 20px;
-            left: 0;
-            right: 0;
-            display: none;
-            justify-content: space-between;
-            padding: 0 20px;
-            z-index: 100;
-        }
-
-        .dpad {
-            display: grid;
-            grid-template-columns: repeat(3, 70px);
-            grid-template-rows: repeat(3, 70px);
-            gap: 5px;
-        }
-
-        .dpad-btn {
-            background: rgba(255, 255, 255, 0.8);
-            border: 4px solid #fff;
-            border-radius: 15px;
-            font-size: 32px;
-            cursor: pointer;
-            transition: all 0.1s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .dpad-btn:active {
-            background: rgba(255, 255, 255, 1);
-            transform: scale(0.95);
-        }
-
-        .dpad-btn.up { grid-column: 2; grid-row: 1; }
-        .dpad-btn.down { grid-column: 2; grid-row: 3; }
-        .dpad-btn.left { grid-column: 1; grid-row: 2; }
-        .dpad-btn.right { grid-column: 3; grid-row: 2; }
-
-        /* Results */
-        .results-container {
+            background: rgba(0, 0, 0, 0.3);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 20px;
+            flex: 1;
             text-align: center;
         }
 
-        .winner-text {
-            font-size: 72px;
+        .score-item.active {
+            border-color: #ffd700;
+            background: rgba(255, 215, 0, 0.2);
+        }
+
+        .score-name {
+            font-size: 20px;
             font-weight: 700;
-            color: #ffeaa7;
-            text-shadow: 
-                3px 3px 0 #ff6b9d,
-                6px 6px 0 #c44569;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
+        }
+
+        .score-value {
+            font-size: 48px;
+            font-weight: 800;
+            color: #ffd700;
+        }
+
+        .question-box {
+            background: rgba(255, 255, 255, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+        }
+
+        .question-topic {
+            font-size: 18px;
+            color: #ffd700;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .question-text {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+        .answer-input {
+            width: 100%;
+            padding: 20px 25px;
+            font-size: 24px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .answer-input:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        .result-message {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin: 20px 0;
+            font-size: 32px;
+            font-weight: 800;
+        }
+
+        .result-message.correct {
+            border: 3px solid #43e97b;
+            color: #43e97b;
+        }
+
+        .result-message.incorrect {
+            border: 3px solid #f5576c;
+            color: #f5576c;
+        }
+
+        .correct-answer {
+            background: rgba(255, 215, 0, 0.2);
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            font-size: 20px;
+        }
+
+        .waiting-message {
+            text-align: center;
+            font-size: 28px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            margin: 20px 0;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-top-color: #ffd700;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .winner-announcement {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .winner-text {
+            font-size: 64px;
+            font-weight: 800;
+            margin: 20px 0;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             animation: celebration 1s ease-in-out infinite;
         }
 
         @keyframes celebration {
-            0%, 100% { transform: scale(1) rotate(0deg); }
-            25% { transform: scale(1.1) rotate(-5deg); }
-            75% { transform: scale(1.1) rotate(5deg); }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
-        .podium {
+        .final-scores {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 30px;
             margin: 30px 0;
+            flex-wrap: wrap;
         }
 
-        .podium-place {
+        .final-score-card {
             background: rgba(255, 255, 255, 0.2);
-            border: 4px solid #fff;
+            border: 3px solid rgba(255, 255, 255, 0.3);
             border-radius: 20px;
             padding: 30px;
             min-width: 200px;
         }
 
-        .podium-place.first {
+        .final-score-card.winner {
             border-color: #ffd700;
-            background: rgba(255, 215, 0, 0.3);
+            background: rgba(255, 215, 0, 0.2);
             transform: scale(1.1);
         }
 
-        .podium-place.second {
-            border-color: #c0c0c0;
-            background: rgba(192, 192, 192, 0.3);
-        }
-
-        .podium-place.third {
-            border-color: #cd7f32;
-            background: rgba(205, 127, 50, 0.3);
-        }
-
         @media (max-width: 768px) {
-            .mobile-controls {
-                display: flex;
-            }
-
-            .game-title {
+            .title {
                 font-size: 48px;
             }
 
-            .character-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .container, .game-container {
+                padding: 25px;
+            }
+
+            .question-text {
+                font-size: 22px;
+            }
+
+            .score-board {
+                flex-direction: column;
             }
         }
     </style>
@@ -444,155 +415,170 @@
 <body>
     <!-- Main Menu -->
     <div id="mainMenu" class="screen active">
-        <h1 class="game-title">🎮 TREASURE CHOMPERS 🎮</h1>
-        <p class="subtitle">Collect gems, dodge obstacles, compete online!</p>
+        <h1 class="title">🧠 BRAIN BATTLE 🧠</h1>
+        <p class="subtitle">Take turns asking questions & guessing answers!</p>
         
-        <button class="button" onclick="showScreen('characterSelect')">🎮 Play Game</button>
-        <button class="button secondary" onclick="showScreen('howToPlay')">📖 How to Play</button>
-        <button class="button" onclick="showScreen('onlineMenu')">🌐 Online Multiplayer</button>
+        <div class="container">
+            <button class="button" onclick="showScreen('howToPlay')">📖 How to Play</button>
+            <button class="button secondary" onclick="showScreen('onlineMenu')">🌐 Play Online</button>
+        </div>
     </div>
 
     <!-- How to Play -->
     <div id="howToPlay" class="screen">
-        <h2 style="font-size: 56px; margin-bottom: 30px;">📖 HOW TO PLAY</h2>
-        <div class="lobby-container" style="max-width: 800px;">
-            <h3 style="font-size: 32px; margin-bottom: 20px;">🎯 Objective</h3>
-            <p style="font-size: 24px; line-height: 1.6; margin-bottom: 30px;">
-                Collect as many gems 💎 and treats 🍪 as you can!<br>
-                First to 100 points wins, or highest score when time runs out!
-            </p>
+        <h1 class="title">📖 How to Play</h1>
+        
+        <div class="container">
+            <h2 style="font-size: 32px; margin-bottom: 20px;">🎯 Game Rules</h2>
             
-            <h3 style="font-size: 32px; margin-bottom: 20px;">🕹️ Controls</h3>
-            <p style="font-size: 24px; line-height: 1.6; margin-bottom: 30px;">
-                <strong>PC:</strong> W/A/S/D or Arrow Keys to move<br>
-                <strong>Mobile:</strong> Use on-screen D-Pad
-            </p>
+            <div style="text-align: left; font-size: 18px; line-height: 1.8;">
+                <p style="margin: 15px 0;"><strong>1.</strong> Players take turns being the <strong>Questioner</strong> and the <strong>Guesser</strong></p>
+                
+                <p style="margin: 15px 0;"><strong>2.</strong> The <strong>Questioner</strong> creates a question with:</p>
+                <ul style="margin-left: 30px;">
+                    <li>Topic/Title (e.g., "Math", "History", "Movies")</li>
+                    <li>The question itself</li>
+                    <li>The correct answer</li>
+                </ul>
+                
+                <p style="margin: 15px 0;"><strong>3.</strong> The <strong>Guesser</strong> sees the topic and question, then tries to guess!</p>
+                
+                <p style="margin: 15px 0;"><strong>4.</strong> <strong>Correct guess = 1 point!</strong> Then switch roles!</p>
+                
+                <p style="margin: 15px 0;"><strong>5.</strong> First to <strong>5 points wins!</strong> 🏆</p>
+            </div>
             
-            <h3 style="font-size: 32px; margin-bottom: 20px;">✨ Items</h3>
-            <p style="font-size: 24px; line-height: 1.6;">
-                💎 Gems = 5 points<br>
-                🍪 Treats = 3 points<br>
-                ⚡ Speed Boost = Go faster!<br>
-                🛡️ Shield = Invincibility!<br>
-                🧲 Magnet = Auto-collect!
-            </p>
+            <button class="button" onclick="showScreen('mainMenu')">← Back</button>
         </div>
-        <button class="button" onclick="showScreen('mainMenu')">← Back</button>
-    </div>
-
-    <!-- Character Select -->
-    <div id="characterSelect" class="screen">
-        <h2 style="font-size: 56px; margin-bottom: 30px;">Choose Your Chomper!</h2>
-        
-        <div class="character-grid" id="characterGrid"></div>
-        
-        <button class="button" onclick="startSoloGame()">🎮 Play Solo</button>
-        <button class="button secondary" onclick="showScreen('mainMenu')">← Back</button>
     </div>
 
     <!-- Online Menu -->
     <div id="onlineMenu" class="screen">
-        <h2 style="font-size: 56px; margin-bottom: 30px;">🌐 Online Multiplayer</h2>
+        <h1 class="title">🌐 Online Play</h1>
         
-        <div class="lobby-container">
-            <input type="text" id="usernameInput" class="input-field" placeholder="Enter Your Name" maxlength="15">
+        <div class="container">
+            <input type="text" id="usernameInput" class="input-field" placeholder="Enter Your Name" maxlength="20">
             
-            <button class="button" onclick="quickMatch()">⚡ Quick Match</button>
-            <button class="button secondary" onclick="showScreen('createLobby')">➕ Create Lobby</button>
-            <button class="button" onclick="showScreen('joinLobby')">🔍 Join Lobby</button>
+            <button class="button" onclick="createLobby()">➕ Create Game</button>
+            <button class="button secondary" onclick="showScreen('joinGame')">🔍 Join Game</button>
+            <button class="button" style="background: linear-gradient(135deg, #a8edea, #fed6e3);" onclick="showScreen('mainMenu')">← Back</button>
         </div>
-        
-        <button class="button small" style="margin-top: 30px;" onclick="showScreen('mainMenu')">← Back</button>
     </div>
 
-    <!-- Create Lobby -->
-    <div id="createLobby" class="screen">
-        <h2 style="font-size: 56px; margin-bottom: 30px;">Create Lobby</h2>
+    <!-- Join Game -->
+    <div id="joinGame" class="screen">
+        <h1 class="title">🔍 Join Game</h1>
         
-        <div class="lobby-container">
-            <button class="button" onclick="createLobby('public')">🌐 Public Lobby</button>
-            <button class="button secondary" onclick="createLobby('private')">🔒 Private Lobby</button>
+        <div class="container">
+            <input type="text" id="joinCodeInput" class="input-field" placeholder="Enter 6-Digit Game Code" maxlength="6" style="text-transform: uppercase; text-align: center;">
+            
+            <button class="button" onclick="joinLobby()">Join Game</button>
+            <button class="button secondary" onclick="showScreen('onlineMenu')">← Back</button>
         </div>
-        
-        <button class="button small" onclick="showScreen('onlineMenu')">← Back</button>
-    </div>
-
-    <!-- Join Lobby -->
-    <div id="joinLobby" class="screen">
-        <h2 style="font-size: 56px; margin-bottom: 30px;">Join Lobby</h2>
-        
-        <div class="lobby-container">
-            <button class="button" onclick="showPublicLobbies()">🌐 Browse Public</button>
-            <input type="text" id="lobbyCodeInput" class="input-field" placeholder="Enter 6-Digit Code" maxlength="6">
-            <button class="button secondary" onclick="joinPrivateLobby()">Join Private</button>
-        </div>
-        
-        <button class="button small" onclick="showScreen('onlineMenu')">← Back</button>
-    </div>
-
-    <!-- Public Lobbies -->
-    <div id="publicLobbies" class="screen">
-        <h2 style="font-size: 56px; margin-bottom: 30px;">Public Lobbies</h2>
-        
-        <div class="lobby-container">
-            <div class="player-list" id="publicLobbyList"></div>
-            <button class="button" onclick="refreshLobbies()">🔄 Refresh</button>
-        </div>
-        
-        <button class="button small" onclick="showScreen('joinLobby')">← Back</button>
     </div>
 
     <!-- Lobby Waiting -->
     <div id="lobbyWaiting" class="screen">
-        <h2 style="font-size: 56px; margin-bottom: 20px;">🎮 Lobby</h2>
+        <h1 class="title">🎮 Game Lobby</h1>
         
-        <div class="lobby-container">
+        <div class="container">
             <div class="lobby-code" id="lobbyCodeDisplay">------</div>
-            <div style="font-size: 24px; margin: 10px 0;">
-                Type: <span id="lobbyTypeDisplay">Public</span>
-            </div>
             
-            <h3 style="margin-top: 20px; font-size: 28px;">Players:</h3>
+            <h3 style="font-size: 28px; margin: 20px 0;">Players:</h3>
             <div class="player-list" id="lobbyPlayerList"></div>
             
-            <button class="button" id="readyButton" onclick="toggleReady()">I'm Ready!</button>
-            <button class="button secondary" id="startButton" onclick="startOnlineGame()" style="display: none;">🚀 Start Game</button>
-            <button class="button small" onclick="leaveLobby()">← Leave</button>
+            <button class="button success" id="readyButton" onclick="toggleReady()">I'm Ready!</button>
+            <button class="button" id="startButton" onclick="startGame()" style="display: none;">🚀 Start Game</button>
+            <button class="button secondary" onclick="leaveLobby()">← Leave</button>
         </div>
     </div>
 
-    <!-- Game Screen -->
-    <div id="gameScreen" class="screen">
-        <div class="game-hud">
-            <div class="score-display">
-                Score: <span id="scoreText">0</span>
-            </div>
-            <div class="timer-display">
-                Time: <span id="timerText">60</span>
-            </div>
-        </div>
-
-        <div class="player-scores" id="playerScores" style="display: none;"></div>
+    <!-- Create Question Screen -->
+    <div id="createQuestion" class="screen">
+        <h1 class="title">✍️ Create Your Question</h1>
         
-        <canvas id="gameCanvas" width="1200" height="700"></canvas>
-        
-        <div class="mobile-controls">
-            <div class="dpad">
-                <div class="dpad-btn up" ontouchstart="mobileMove('up', true)" ontouchend="mobileMove('up', false)" onmousedown="mobileMove('up', true)" onmouseup="mobileMove('up', false)">↑</div>
-                <div class="dpad-btn down" ontouchstart="mobileMove('down', true)" ontouchend="mobileMove('down', false)" onmousedown="mobileMove('down', true)" onmouseup="mobileMove('down', false)">↓</div>
-                <div class="dpad-btn left" ontouchstart="mobileMove('left', true)" ontouchend="mobileMove('left', false)" onmousedown="mobileMove('left', true)" onmouseup="mobileMove('left', false)">←</div>
-                <div class="dpad-btn right" ontouchstart="mobileMove('right', true)" ontouchend="mobileMove('right', false)" onmousedown="mobileMove('right', true)" onmouseup="mobileMove('right', false)">→</div>
+        <div class="game-container">
+            <div class="turn-indicator">
+                🎯 YOUR TURN - Create a Question!
             </div>
-            <button class="button small" onclick="exitGame()">Exit</button>
-        </div>
-    </div>
 
-    <!-- Results Screen -->
-    <div id="resultsScreen" class="screen">
-        <div class="results-container">
-            <div class="winner-text" id="winnerText">🏆 YOU WIN! 🏆</div>
+            <div class="score-board" id="createScoreboard"></div>
             
-            <div class="podium" id="podium"></div>
+            <div class="container" style="max-width: 100%;">
+                <input type="text" id="topicInput" class="input-field" placeholder="Topic (e.g., Math, History, Movies)" maxlength="30">
+                
+                <textarea id="questionInput" class="input-field" placeholder="Enter your question here..."></textarea>
+                
+                <input type="text" id="answerInput" class="input-field" placeholder="Enter the correct answer">
+                
+                <button class="button" onclick="submitQuestion()">✅ Submit Question</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Guess Answer Screen -->
+    <div id="guessAnswer" class="screen">
+        <h1 class="title">🤔 Your Turn to Guess!</h1>
+        
+        <div class="game-container">
+            <div class="turn-indicator">
+                🎯 GUESS THE ANSWER!
+            </div>
+
+            <div class="score-board" id="guessScoreboard"></div>
+            
+            <div class="question-box">
+                <div class="question-topic" id="displayTopic">TOPIC</div>
+                <div class="question-text" id="displayQuestion">Question will appear here...</div>
+            </div>
+            
+            <input type="text" id="guessInput" class="answer-input" placeholder="Type your answer here...">
+            
+            <button class="button" onclick="submitGuess()">🎯 Submit Answer</button>
+        </div>
+    </div>
+
+    <!-- Waiting for Question -->
+    <div id="waitingForQuestion" class="screen">
+        <h1 class="title">⏳ Waiting...</h1>
+        
+        <div class="game-container">
+            <div class="score-board" id="waitScoreboard"></div>
+            
+            <div class="waiting-message">
+                <div class="spinner"></div>
+                <p style="margin-top: 20px;">Waiting for <strong id="questionerName">opponent</strong> to create their question...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Show Result Screen -->
+    <div id="showResult" class="screen">
+        <h1 class="title">📊 Result</h1>
+        
+        <div class="game-container">
+            <div class="score-board" id="resultScoreboard"></div>
+            
+            <div class="result-message" id="resultMessage">
+                ✓ CORRECT!
+            </div>
+            
+            <div class="correct-answer">
+                <strong>Question:</strong> <span id="resultQuestion">Question</span><br><br>
+                <strong>Correct Answer:</strong> <span id="resultCorrectAnswer">Answer</span><br>
+                <strong>Your Guess:</strong> <span id="resultYourGuess">Guess</span>
+            </div>
+            
+            <button class="button" onclick="nextRound()">➡️ Next Round</button>
+        </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameOver" class="screen">
+        <div class="winner-announcement">
+            <div class="winner-text">🏆 <span id="winnerName">WINNER</span> WINS! 🏆</div>
+            
+            <div class="final-scores" id="finalScores"></div>
             
             <button class="button" onclick="playAgain()">🔄 Play Again</button>
             <button class="button secondary" onclick="showScreen('mainMenu')">← Main Menu</button>
@@ -601,210 +587,24 @@
 
     <script>
         // ========================================
-        // GAME CONFIGURATION
+        // GAME STATE
         // ========================================
         
-        const GAME_CONFIG = {
-            canvasWidth: 1200,
-            canvasHeight: 700,
-            playerSpeed: 5,
-            playerSize: 40,
-            itemSize: 30,
-            gemValue: 5,
-            treatValue: 3,
-            winScore: 100,
-            gameTime: 60, // seconds
-            spawnRate: 60, // frames between spawns
-            powerUpDuration: 180 // frames (3 seconds)
-        };
-
         const GAME_STATE = {
-            mode: 'solo',
             username: '',
             lobbyCode: '',
             isHost: false,
             isReady: false,
-            isOnline: false,
-            selectedCharacter: 'cat',
-            player: null,
-            opponents: {},
-            items: [],
-            score: 0,
-            timeLeft: 60,
-            gameActive: false
+            currentTurn: 0, // 0 = player1, 1 = player2
+            players: [],
+            scores: {},
+            currentQuestion: null,
+            roundNumber: 0,
+            winScore: 5
         };
 
-        let canvas, ctx;
-        let gameLoop = null;
-        let spawnTimer = 0;
-        let gameTimer = null;
         let lobbyUpdateInterval = null;
-        let onlineUpdateInterval = null;
-
-        // ========================================
-        // CHARACTERS
-        // ========================================
-        
-        const CHARACTERS = {
-            cat: { icon: '🐱', name: 'Kitty', color: '#ff6b9d' },
-            dog: { icon: '🐶', name: 'Puppy', color: '#a29bfe' },
-            bunny: { icon: '🐰', name: 'Bunny', color: '#ffeaa7' },
-            bear: { icon: '🐻', name: 'Bear', color: '#fdcb6e' },
-            fox: { icon: '🦊', name: 'Foxy', color: '#e17055' },
-            panda: { icon: '🐼', name: 'Panda', color: '#74b9ff' },
-            koala: { icon: '🐨', name: 'Koala', color: '#a29bfe' },
-            tiger: { icon: '🐯', name: 'Tiger', color: '#fd79a8' }
-        };
-
-        // ========================================
-        // PLAYER CLASS
-        // ========================================
-        
-        class Player {
-            constructor(x, y, character, isLocal = true) {
-                this.x = x;
-                this.y = y;
-                this.char = CHARACTERS[character];
-                this.isLocal = isLocal;
-                this.speed = GAME_CONFIG.playerSpeed;
-                this.size = GAME_CONFIG.playerSize;
-                this.score = 0;
-                this.powerUp = null;
-                this.powerUpTimer = 0;
-                this.keys = {};
-            }
-
-            update() {
-                if (!this.isLocal) return;
-
-                // Movement
-                if (this.keys.up || this.keys.w) this.y -= this.speed;
-                if (this.keys.down || this.keys.s) this.y += this.speed;
-                if (this.keys.left || this.keys.a) this.x -= this.speed;
-                if (this.keys.right || this.keys.d) this.x += this.speed;
-
-                // Speed boost
-                if (this.powerUp === 'speed') {
-                    this.speed = GAME_CONFIG.playerSpeed * 1.5;
-                } else {
-                    this.speed = GAME_CONFIG.playerSpeed;
-                }
-
-                // Boundaries
-                this.x = Math.max(20, Math.min(this.x, GAME_CONFIG.canvasWidth - 20));
-                this.y = Math.max(20, Math.min(this.y, GAME_CONFIG.canvasHeight - 20));
-
-                // Power-up timer
-                if (this.powerUpTimer > 0) {
-                    this.powerUpTimer--;
-                    if (this.powerUpTimer === 0) {
-                        this.powerUp = null;
-                    }
-                }
-            }
-
-            draw(ctx) {
-                // Draw glow
-                if (this.powerUp) {
-                    ctx.shadowBlur = 20;
-                    ctx.shadowColor = this.char.color;
-                }
-
-                // Draw character
-                ctx.font = `${this.size}px Arial`;
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(this.char.icon, this.x, this.y);
-
-                ctx.shadowBlur = 0;
-
-                // Draw power-up indicator
-                if (this.powerUp) {
-                    const icons = {
-                        speed: '⚡',
-                        shield: '🛡️',
-                        magnet: '🧲'
-                    };
-                    ctx.font = '20px Arial';
-                    ctx.fillText(icons[this.powerUp] || '', this.x, this.y - 30);
-                }
-            }
-
-            collectItem(item) {
-                if (item.type === 'gem') {
-                    this.score += GAME_CONFIG.gemValue;
-                } else if (item.type === 'treat') {
-                    this.score += GAME_CONFIG.treatValue;
-                } else {
-                    // Power-up
-                    this.powerUp = item.type;
-                    this.powerUpTimer = GAME_CONFIG.powerUpDuration;
-                }
-                GAME_STATE.score = this.score;
-            }
-        }
-
-        // ========================================
-        // ITEM CLASS
-        // ========================================
-        
-        class Item {
-            constructor(x, y, type) {
-                this.x = x;
-                this.y = y;
-                this.type = type;
-                this.size = GAME_CONFIG.itemSize;
-                this.collected = false;
-
-                const icons = {
-                    gem: '💎',
-                    treat: '🍪',
-                    speed: '⚡',
-                    shield: '🛡️',
-                    magnet: '🧲'
-                };
-                this.icon = icons[type];
-            }
-
-            draw(ctx) {
-                if (this.collected) return;
-
-                ctx.font = `${this.size}px Arial`;
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(this.icon, this.x, this.y);
-
-                // Sparkle effect
-                ctx.save();
-                ctx.globalAlpha = 0.5;
-                ctx.font = `${this.size * 1.2}px Arial`;
-                ctx.fillText('✨', this.x - 15, this.y - 15);
-                ctx.fillText('✨', this.x + 15, this.y + 15);
-                ctx.restore();
-            }
-
-            checkCollision(player) {
-                if (this.collected) return false;
-
-                const dx = this.x - player.x;
-                const dy = this.y - player.y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                // Magnet effect
-                if (player.powerUp === 'magnet' && distance < 150) {
-                    const angle = Math.atan2(dy, dx);
-                    this.x -= Math.cos(angle) * 3;
-                    this.y -= Math.sin(angle) * 3;
-                }
-
-                if (distance < (player.size + this.size) / 2) {
-                    this.collected = true;
-                    player.collectItem(this);
-                    return true;
-                }
-                return false;
-            }
-        }
+        let gameUpdateInterval = null;
 
         // ========================================
         // UI FUNCTIONS
@@ -815,306 +615,8 @@
             document.getElementById(screenId).classList.add('active');
         }
 
-        function initCharacterSelect() {
-            const grid = document.getElementById('characterGrid');
-            grid.innerHTML = '';
-
-            Object.entries(CHARACTERS).forEach(([id, char]) => {
-                const card = document.createElement('div');
-                card.className = 'character-card';
-                if (id === GAME_STATE.selectedCharacter) {
-                    card.classList.add('selected');
-                }
-
-                card.innerHTML = `
-                    <div class="character-icon">${char.icon}</div>
-                    <div class="character-name">${char.name}</div>
-                `;
-
-                card.onclick = () => {
-                    GAME_STATE.selectedCharacter = id;
-                    initCharacterSelect();
-                };
-
-                grid.appendChild(card);
-            });
-        }
-
         // ========================================
-        // GAME FUNCTIONS
-        // ========================================
-        
-        function startSoloGame() {
-            GAME_STATE.mode = 'solo';
-            GAME_STATE.isOnline = false;
-            initGame();
-            showScreen('gameScreen');
-            startGameLoop();
-        }
-
-        function initGame() {
-            canvas = document.getElementById('gameCanvas');
-            ctx = canvas.getContext('2d');
-
-            // Create player
-            GAME_STATE.player = new Player(
-                GAME_CONFIG.canvasWidth / 2,
-                GAME_CONFIG.canvasHeight / 2,
-                GAME_STATE.selectedCharacter,
-                true
-            );
-
-            GAME_STATE.items = [];
-            GAME_STATE.score = 0;
-            GAME_STATE.timeLeft = GAME_CONFIG.gameTime;
-            GAME_STATE.gameActive = true;
-            spawnTimer = 0;
-
-            // Update mobile controls
-            if (isMobile()) {
-                document.querySelector('.mobile-controls').style.display = 'flex';
-            }
-
-            // Start timer
-            startGameTimer();
-
-            // Spawn initial items
-            for (let i = 0; i < 10; i++) {
-                spawnRandomItem();
-            }
-        }
-
-        function startGameLoop() {
-            if (gameLoop) cancelAnimationFrame(gameLoop);
-
-            function loop() {
-                if (!GAME_STATE.gameActive) return;
-
-                update();
-                render();
-                gameLoop = requestAnimationFrame(loop);
-            }
-
-            loop();
-        }
-
-        function update() {
-            if (!GAME_STATE.player) return;
-
-            GAME_STATE.player.update();
-
-            // Update opponents
-            Object.values(GAME_STATE.opponents).forEach(opp => opp.update());
-
-            // Check item collisions
-            GAME_STATE.items.forEach(item => {
-                item.checkCollision(GAME_STATE.player);
-            });
-
-            // Remove collected items
-            GAME_STATE.items = GAME_STATE.items.filter(item => !item.collected);
-
-            // Spawn new items
-            spawnTimer++;
-            if (spawnTimer >= GAME_CONFIG.spawnRate) {
-                spawnRandomItem();
-                spawnTimer = 0;
-            }
-
-            // Update UI
-            document.getElementById('scoreText').textContent = GAME_STATE.score;
-
-            // Check win condition
-            if (GAME_STATE.score >= GAME_CONFIG.winScore) {
-                endGame();
-            }
-        }
-
-        function render() {
-            // Clear canvas
-            const gradient = ctx.createLinearGradient(0, 0, 0, GAME_CONFIG.canvasHeight);
-            gradient.addColorStop(0, '#a8edea');
-            gradient.addColorStop(1, '#fed6e3');
-            ctx.fillStyle = gradient;
-            ctx.fillRect(0, 0, GAME_CONFIG.canvasWidth, GAME_CONFIG.canvasHeight);
-
-            // Draw decorations
-            drawDecorations();
-
-            // Draw items
-            GAME_STATE.items.forEach(item => item.draw(ctx));
-
-            // Draw opponents
-            Object.values(GAME_STATE.opponents).forEach(opp => opp.draw(ctx));
-
-            // Draw player
-            if (GAME_STATE.player) {
-                GAME_STATE.player.draw(ctx);
-            }
-        }
-
-        function drawDecorations() {
-            ctx.font = '30px Arial';
-            ctx.globalAlpha = 0.1;
-            for (let i = 0; i < 20; i++) {
-                const x = (i * 60) % GAME_CONFIG.canvasWidth;
-                const y = ((i * 70) % GAME_CONFIG.canvasHeight);
-                ctx.fillText(['🌸', '🌺', '🌼', '🌻'][i % 4], x, y);
-            }
-            ctx.globalAlpha = 1;
-        }
-
-        function spawnRandomItem() {
-            const x = Math.random() * (GAME_CONFIG.canvasWidth - 100) + 50;
-            const y = Math.random() * (GAME_CONFIG.canvasHeight - 100) + 50;
-
-            const rand = Math.random();
-            let type;
-
-            if (rand < 0.5) {
-                type = 'gem';
-            } else if (rand < 0.8) {
-                type = 'treat';
-            } else if (rand < 0.9) {
-                type = 'speed';
-            } else if (rand < 0.95) {
-                type = 'magnet';
-            } else {
-                type = 'shield';
-            }
-
-            GAME_STATE.items.push(new Item(x, y, type));
-        }
-
-        function startGameTimer() {
-            if (gameTimer) clearInterval(gameTimer);
-
-            gameTimer = setInterval(() => {
-                GAME_STATE.timeLeft--;
-                document.getElementById('timerText').textContent = GAME_STATE.timeLeft;
-
-                if (GAME_STATE.timeLeft <= 0) {
-                    endGame();
-                }
-            }, 1000);
-        }
-
-        function endGame() {
-            GAME_STATE.gameActive = false;
-            if (gameLoop) cancelAnimationFrame(gameLoop);
-            if (gameTimer) clearInterval(gameTimer);
-
-            showResults();
-        }
-
-        function showResults() {
-            document.getElementById('winnerText').textContent = 
-                GAME_STATE.score >= GAME_CONFIG.winScore ? '🏆 YOU WIN! 🏆' : '⏰ TIME UP! ⏰';
-
-            const podium = document.getElementById('podium');
-            podium.innerHTML = '';
-
-            // Create podium for multiplayer (show all players ranked)
-            if (GAME_STATE.isOnline) {
-                const allPlayers = [
-                    { name: GAME_STATE.username, score: GAME_STATE.score },
-                    ...Object.entries(GAME_STATE.opponents).map(([name, opp]) => ({
-                        name, score: opp.score
-                    }))
-                ];
-
-                allPlayers.sort((a, b) => b.score - a.score);
-
-                allPlayers.slice(0, 3).forEach((player, idx) => {
-                    const place = document.createElement('div');
-                    place.className = `podium-place ${['first', 'second', 'third'][idx]}`;
-                    place.innerHTML = `
-                        <div style="font-size: 48px;">${['🥇', '🥈', '🥉'][idx]}</div>
-                        <div style="font-size: 28px; margin: 10px 0;">${player.name}</div>
-                        <div style="font-size: 36px; color: #ffeaa7;">${player.score} pts</div>
-                    `;
-                    podium.appendChild(place);
-                });
-            } else {
-                // Solo game - just show score
-                const place = document.createElement('div');
-                place.className = 'podium-place first';
-                place.innerHTML = `
-                    <div style="font-size: 48px;">🥇</div>
-                    <div style="font-size: 28px; margin: 10px 0;">You</div>
-                    <div style="font-size: 36px; color: #ffeaa7;">${GAME_STATE.score} pts</div>
-                `;
-                podium.appendChild(place);
-            }
-
-            showScreen('resultsScreen');
-        }
-
-        function playAgain() {
-            if (GAME_STATE.isOnline) {
-                // Return to lobby
-                showScreen('lobbyWaiting');
-            } else {
-                startSoloGame();
-            }
-        }
-
-        function exitGame() {
-            GAME_STATE.gameActive = false;
-            if (gameLoop) cancelAnimationFrame(gameLoop);
-            if (gameTimer) clearInterval(gameTimer);
-
-            if (GAME_STATE.isOnline) {
-                leaveLobby();
-            } else {
-                showScreen('mainMenu');
-            }
-        }
-
-        // ========================================
-        // CONTROLS
-        // ========================================
-        
-        document.addEventListener('keydown', (e) => {
-            if (!GAME_STATE.player) return;
-
-            const key = e.key.toLowerCase();
-            if (['w', 'a', 's', 'd', 'arrowup', 'arrowdown', 'arrowleft', 'arrowright'].includes(key)) {
-                e.preventDefault();
-            }
-
-            GAME_STATE.player.keys[key] = true;
-            GAME_STATE.player.keys[e.key] = true;
-        });
-
-        document.addEventListener('keyup', (e) => {
-            if (!GAME_STATE.player) return;
-
-            const key = e.key.toLowerCase();
-            GAME_STATE.player.keys[key] = false;
-            GAME_STATE.player.keys[e.key] = false;
-        });
-
-        let mobileKeys = {};
-
-        function mobileMove(direction, pressed) {
-            if (!GAME_STATE.player) return;
-
-            mobileKeys[direction] = pressed;
-
-            GAME_STATE.player.keys.up = mobileKeys.up || false;
-            GAME_STATE.player.keys.down = mobileKeys.down || false;
-            GAME_STATE.player.keys.left = mobileKeys.left || false;
-            GAME_STATE.player.keys.right = mobileKeys.right || false;
-        }
-
-        function isMobile() {
-            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-                   window.innerWidth <= 768;
-        }
-
-        // ========================================
-        // ONLINE SYSTEM
+        // LOBBY FUNCTIONS
         // ========================================
         
         function generateLobbyCode() {
@@ -1126,7 +628,7 @@
             return code;
         }
 
-        async function createLobby(type) {
+        async function createLobby() {
             const username = document.getElementById('usernameInput').value.trim();
             if (!username) {
                 alert('Please enter your name!');
@@ -1144,23 +646,85 @@
             GAME_STATE.isReady = false;
 
             try {
-                await window.storage.set(`treasure_lobby:${GAME_STATE.lobbyCode}`, JSON.stringify({
+                await window.storage.set(`brainbattle:${GAME_STATE.lobbyCode}`, JSON.stringify({
                     code: GAME_STATE.lobbyCode,
-                    type: type,
                     host: username,
                     players: [username],
                     readyStates: {},
+                    scores: { [username]: 0 },
                     created: Date.now(),
-                    status: 'waiting'
+                    status: 'waiting',
+                    currentTurn: 0,
+                    roundNumber: 0,
+                    currentQuestion: null
                 }), true);
 
                 document.getElementById('lobbyCodeDisplay').textContent = GAME_STATE.lobbyCode;
-                document.getElementById('lobbyTypeDisplay').textContent = type.toUpperCase();
-
                 showScreen('lobbyWaiting');
                 startLobbyUpdates();
             } catch (error) {
                 alert('Failed to create lobby.');
+                console.error(error);
+            }
+        }
+
+        async function joinLobby() {
+            const username = document.getElementById('usernameInput').value.trim();
+            const code = document.getElementById('joinCodeInput').value.trim().toUpperCase();
+
+            if (!username) {
+                alert('Please enter your name!');
+                return;
+            }
+
+            if (!code || code.length !== 6) {
+                alert('Please enter a valid 6-character code!');
+                return;
+            }
+
+            if (!window.storage) {
+                alert('Online features require storage support.');
+                return;
+            }
+
+            try {
+                const lobbyData = await window.storage.get(`brainbattle:${code}`, true);
+                if (!lobbyData || !lobbyData.value) {
+                    alert('Game not found!');
+                    return;
+                }
+
+                const lobby = JSON.parse(lobbyData.value);
+                if (lobby.status !== 'waiting') {
+                    alert('Game has already started!');
+                    return;
+                }
+
+                if (lobby.players.length >= 2) {
+                    alert('Game is full!');
+                    return;
+                }
+
+                GAME_STATE.username = username;
+                GAME_STATE.lobbyCode = code;
+                GAME_STATE.isHost = false;
+                GAME_STATE.isReady = false;
+
+                if (!lobby.players.includes(username)) {
+                    lobby.players.push(username);
+                    if (!lobby.readyStates) lobby.readyStates = {};
+                    lobby.readyStates[username] = false;
+                    if (!lobby.scores) lobby.scores = {};
+                    lobby.scores[username] = 0;
+                    await window.storage.set(`brainbattle:${code}`, JSON.stringify(lobby), true);
+                }
+
+                document.getElementById('lobbyCodeDisplay').textContent = code;
+                showScreen('lobbyWaiting');
+                updateReadyButton();
+                startLobbyUpdates();
+            } catch (error) {
+                alert('Failed to join game.');
                 console.error(error);
             }
         }
@@ -1171,12 +735,12 @@
 
             if (window.storage && GAME_STATE.lobbyCode) {
                 try {
-                    const lobbyData = await window.storage.get(`treasure_lobby:${GAME_STATE.lobbyCode}`, true);
+                    const lobbyData = await window.storage.get(`brainbattle:${GAME_STATE.lobbyCode}`, true);
                     if (lobbyData && lobbyData.value) {
                         const lobby = JSON.parse(lobbyData.value);
                         if (!lobby.readyStates) lobby.readyStates = {};
                         lobby.readyStates[GAME_STATE.username] = GAME_STATE.isReady;
-                        await window.storage.set(`treasure_lobby:${GAME_STATE.lobbyCode}`, JSON.stringify(lobby), true);
+                        await window.storage.set(`brainbattle:${GAME_STATE.lobbyCode}`, JSON.stringify(lobby), true);
                     }
                 } catch (error) {
                     console.error('Failed to update ready state:', error);
@@ -1188,10 +752,10 @@
             const btn = document.getElementById('readyButton');
             if (GAME_STATE.isReady) {
                 btn.textContent = '✓ Ready!';
-                btn.style.background = 'linear-gradient(135deg, #00ff00, #00aa00)';
+                btn.style.background = 'linear-gradient(135deg, #43e97b, #38f9d7)';
             } else {
                 btn.textContent = "I'm Ready!";
-                btn.style.background = 'linear-gradient(135deg, #ff6b9d, #c44569)';
+                btn.style.background = 'linear-gradient(135deg, #f093fb, #f5576c)';
             }
         }
 
@@ -1204,7 +768,7 @@
             if (!window.storage || !GAME_STATE.lobbyCode) return;
 
             try {
-                const lobbyData = await window.storage.get(`treasure_lobby:${GAME_STATE.lobbyCode}`, true);
+                const lobbyData = await window.storage.get(`brainbattle:${GAME_STATE.lobbyCode}`, true);
                 if (!lobbyData || !lobbyData.value) {
                     alert('Lobby was closed!');
                     leaveLobby();
@@ -1213,15 +777,21 @@
 
                 const lobby = JSON.parse(lobbyData.value);
 
-                if (lobby.status === 'playing' && !GAME_STATE.gameActive) {
-                    startOnlineGame();
+                if (lobby.status === 'playing') {
+                    if (lobbyUpdateInterval) {
+                        clearInterval(lobbyUpdateInterval);
+                    }
+                    startGameplay();
                     return;
                 }
+
+                GAME_STATE.players = lobby.players;
+                GAME_STATE.scores = lobby.scores;
 
                 const playerList = document.getElementById('lobbyPlayerList');
                 playerList.innerHTML = '';
 
-                let allReady = lobby.players.length > 1;
+                let allReady = lobby.players.length === 2;
                 const readyStates = lobby.readyStates || {};
 
                 lobby.players.forEach(playerName => {
@@ -1254,116 +824,27 @@
             }
         }
 
-        async function startOnlineGame() {
-            if (GAME_STATE.isHost && window.storage) {
-                try {
-                    const lobbyData = await window.storage.get(`treasure_lobby:${GAME_STATE.lobbyCode}`, true);
-                    if (lobbyData && lobbyData.value) {
-                        const lobby = JSON.parse(lobbyData.value);
-                        lobby.status = 'playing';
-                        await window.storage.set(`treasure_lobby:${GAME_STATE.lobbyCode}`, JSON.stringify(lobby), true);
-                    }
-                } catch (error) {
-                    console.error('Failed to start game:', error);
+        async function startGame() {
+            if (!GAME_STATE.isHost || !window.storage) return;
+
+            try {
+                const lobbyData = await window.storage.get(`brainbattle:${GAME_STATE.lobbyCode}`, true);
+                if (lobbyData && lobbyData.value) {
+                    const lobby = JSON.parse(lobbyData.value);
+                    lobby.status = 'playing';
+                    lobby.currentTurn = 0; // Player 1 starts
+                    lobby.roundNumber = 1;
+                    await window.storage.set(`brainbattle:${GAME_STATE.lobbyCode}`, JSON.stringify(lobby), true);
                 }
+            } catch (error) {
+                console.error('Failed to start game:', error);
             }
-
-            if (lobbyUpdateInterval) {
-                clearInterval(lobbyUpdateInterval);
-            }
-
-            GAME_STATE.isOnline = true;
-            initGame();
-            showScreen('gameScreen');
-            startGameLoop();
-            startOnlineSync();
-        }
-
-        function startOnlineSync() {
-            if (onlineUpdateInterval) clearInterval(onlineUpdateInterval);
-
-            onlineUpdateInterval = setInterval(async () => {
-                if (!GAME_STATE.isOnline || !window.storage) return;
-
-                try {
-                    // Send our state
-                    await window.storage.set(`treasure_game:${GAME_STATE.lobbyCode}:${GAME_STATE.username}`, JSON.stringify({
-                        x: GAME_STATE.player.x,
-                        y: GAME_STATE.player.y,
-                        score: GAME_STATE.score,
-                        character: GAME_STATE.selectedCharacter,
-                        lastUpdate: Date.now()
-                    }), true);
-
-                    // Get opponent states
-                    const result = await window.storage.list(`treasure_game:${GAME_STATE.lobbyCode}:`, true);
-                    if (result && result.keys) {
-                        const newOpponents = {};
-
-                        for (const key of result.keys) {
-                            if (key.includes(GAME_STATE.username)) continue;
-
-                            try {
-                                const playerData = await window.storage.get(key, true);
-                                if (playerData && playerData.value) {
-                                    const data = JSON.parse(playerData.value);
-                                    if (Date.now() - data.lastUpdate < 5000) {
-                                        const name = key.split(':').pop();
-                                        if (!GAME_STATE.opponents[name]) {
-                                            GAME_STATE.opponents[name] = new Player(data.x, data.y, data.character, false);
-                                        }
-                                        GAME_STATE.opponents[name].x = data.x;
-                                        GAME_STATE.opponents[name].y = data.y;
-                                        GAME_STATE.opponents[name].score = data.score;
-                                        newOpponents[name] = GAME_STATE.opponents[name];
-                                    }
-                                }
-                            } catch (e) {
-                                // Skip
-                            }
-                        }
-
-                        GAME_STATE.opponents = newOpponents;
-                        updatePlayerScores();
-                    }
-                } catch (error) {
-                    console.log('Online sync error:', error);
-                }
-            }, 200);
-        }
-
-        function updatePlayerScores() {
-            const scoresDiv = document.getElementById('playerScores');
-            scoresDiv.style.display = 'block';
-            scoresDiv.innerHTML = '<h3 style="font-size: 24px; margin-bottom: 10px;">Players:</h3>';
-
-            const allPlayers = [
-                { name: GAME_STATE.username + ' (You)', score: GAME_STATE.score },
-                ...Object.entries(GAME_STATE.opponents).map(([name, opp]) => ({
-                    name, score: opp.score
-                }))
-            ];
-
-            allPlayers.sort((a, b) => b.score - a.score);
-
-            allPlayers.forEach((player, idx) => {
-                const item = document.createElement('div');
-                item.className = 'score-item';
-                if (player.name.includes('(You)')) {
-                    item.classList.add('you');
-                }
-                item.innerHTML = `
-                    <span>${idx + 1}. ${player.name}</span>
-                    <span>${player.score}</span>
-                `;
-                scoresDiv.appendChild(item);
-            });
         }
 
         async function leaveLobby() {
             if (GAME_STATE.isHost && window.storage) {
                 try {
-                    await window.storage.delete(`treasure_lobby:${GAME_STATE.lobbyCode}`, true);
+                    await window.storage.delete(`brainbattle:${GAME_STATE.lobbyCode}`, true);
                 } catch (error) {
                     console.error('Failed to delete lobby:', error);
                 }
@@ -1372,133 +853,297 @@
             if (lobbyUpdateInterval) {
                 clearInterval(lobbyUpdateInterval);
             }
-            if (onlineUpdateInterval) {
-                clearInterval(onlineUpdateInterval);
+            if (gameUpdateInterval) {
+                clearInterval(gameUpdateInterval);
             }
 
             GAME_STATE.isReady = false;
             GAME_STATE.lobbyCode = '';
-            GAME_STATE.isOnline = false;
             showScreen('onlineMenu');
         }
 
-        async function showPublicLobbies() {
-            showScreen('publicLobbies');
-            refreshLobbies();
+        // ========================================
+        // GAMEPLAY FUNCTIONS
+        // ========================================
+        
+        async function startGameplay() {
+            if (gameUpdateInterval) clearInterval(gameUpdateInterval);
+            
+            gameUpdateInterval = setInterval(updateGameState, 1000);
+            updateGameState();
         }
 
-        async function refreshLobbies() {
-            if (!window.storage) return;
-
-            const list = document.getElementById('publicLobbyList');
-            list.innerHTML = '<div style="text-align: center; padding: 20px;">Searching...</div>';
+        async function updateGameState() {
+            if (!window.storage || !GAME_STATE.lobbyCode) return;
 
             try {
-                const result = await window.storage.list('treasure_lobby:', true);
-                list.innerHTML = '';
-
-                if (result && result.keys && result.keys.length > 0) {
-                    let found = false;
-                    for (const key of result.keys) {
-                        try {
-                            const lobbyData = await window.storage.get(key, true);
-                            if (lobbyData && lobbyData.value) {
-                                const lobby = JSON.parse(lobbyData.value);
-                                if (lobby.type === 'public' && lobby.status === 'waiting' &&
-                                    Date.now() - lobby.created < 300000) {
-                                    found = true;
-                                    const item = document.createElement('div');
-                                    item.className = 'player-item';
-                                    item.innerHTML = `
-                                        <div>
-                                            <strong>${lobby.host}'s Game</strong><br>
-                                            ${lobby.players.length} player(s)
-                                        </div>
-                                        <button class="button small" onclick="joinLobbyByCode('${lobby.code}')">Join</button>
-                                    `;
-                                    list.appendChild(item);
-                                }
-                            }
-                        } catch (e) {}
-                    }
-                    if (!found) {
-                        list.innerHTML = '<div style="text-align: center; padding: 20px;">No lobbies found</div>';
-                    }
-                } else {
-                    list.innerHTML = '<div style="text-align: center; padding: 20px;">No lobbies found</div>';
-                }
-            } catch (error) {
-                list.innerHTML = '<div style="text-align: center; padding: 20px;">Error loading lobbies</div>';
-            }
-        }
-
-        async function joinPrivateLobby() {
-            const code = document.getElementById('lobbyCodeInput').value.trim().toUpperCase();
-            if (!code || code.length !== 6) {
-                alert('Please enter a valid 6-character code!');
-                return;
-            }
-            await joinLobbyByCode(code);
-        }
-
-        async function joinLobbyByCode(code) {
-            const username = document.getElementById('usernameInput').value.trim();
-            if (!username) {
-                alert('Please enter your name!');
-                showScreen('onlineMenu');
-                return;
-            }
-
-            if (!window.storage) {
-                alert('Online features require storage support.');
-                return;
-            }
-
-            try {
-                const lobbyData = await window.storage.get(`treasure_lobby:${code}`, true);
-                if (!lobbyData || !lobbyData.value) {
-                    alert('Lobby not found!');
-                    return;
-                }
+                const lobbyData = await window.storage.get(`brainbattle:${GAME_STATE.lobbyCode}`, true);
+                if (!lobbyData || !lobbyData.value) return;
 
                 const lobby = JSON.parse(lobbyData.value);
-                if (lobby.status !== 'waiting') {
-                    alert('Lobby has already started!');
-                    return;
+                
+                GAME_STATE.players = lobby.players;
+                GAME_STATE.scores = lobby.scores;
+                GAME_STATE.currentTurn = lobby.currentTurn || 0;
+                GAME_STATE.roundNumber = lobby.roundNumber || 1;
+                GAME_STATE.currentQuestion = lobby.currentQuestion;
+
+                // Check for winner
+                for (const [player, score] of Object.entries(GAME_STATE.scores)) {
+                    if (score >= GAME_STATE.winScore) {
+                        showGameOver(player);
+                        return;
+                    }
                 }
 
-                GAME_STATE.username = username;
-                GAME_STATE.lobbyCode = code;
-                GAME_STATE.isHost = false;
-                GAME_STATE.isReady = false;
+                // Determine who is questioning
+                const questionerIndex = GAME_STATE.currentTurn % 2;
+                const questioner = GAME_STATE.players[questionerIndex];
+                const isMyTurnToAsk = questioner === GAME_STATE.username;
 
-                if (!lobby.players.includes(username)) {
-                    lobby.players.push(username);
-                    if (!lobby.readyStates) lobby.readyStates = {};
-                    lobby.readyStates[username] = false;
-                    await window.storage.set(`treasure_lobby:${code}`, JSON.stringify(lobby), true);
+                if (GAME_STATE.currentQuestion) {
+                    // Question exists
+                    if (GAME_STATE.currentQuestion.status === 'answered') {
+                        // Show result
+                        showResultScreen();
+                    } else if (isMyTurnToAsk) {
+                        // I asked, waiting for answer
+                        showWaitingForAnswer();
+                    } else {
+                        // My turn to guess
+                        showGuessScreen();
+                    }
+                } else {
+                    // No question yet
+                    if (isMyTurnToAsk) {
+                        // My turn to create question
+                        showCreateScreen();
+                    } else {
+                        // Waiting for opponent to create question
+                        showWaitingScreen(questioner);
+                    }
                 }
-
-                document.getElementById('lobbyCodeDisplay').textContent = code;
-                document.getElementById('lobbyTypeDisplay').textContent = lobby.type.toUpperCase();
-
-                showScreen('lobbyWaiting');
-                updateReadyButton();
-                startLobbyUpdates();
             } catch (error) {
-                alert('Failed to join lobby.');
-                console.error(error);
+                console.error('Game update error:', error);
             }
         }
 
-        function quickMatch() {
-            const username = document.getElementById('usernameInput').value.trim();
-            if (!username) {
-                alert('Please enter your name!');
+        function showCreateScreen() {
+            updateScoreboards('createScoreboard');
+            showScreen('createQuestion');
+        }
+
+        function showGuessScreen() {
+            if (!GAME_STATE.currentQuestion) return;
+            
+            updateScoreboards('guessScoreboard');
+            document.getElementById('displayTopic').textContent = GAME_STATE.currentQuestion.topic;
+            document.getElementById('displayQuestion').textContent = GAME_STATE.currentQuestion.question;
+            document.getElementById('guessInput').value = '';
+            showScreen('guessAnswer');
+        }
+
+        function showWaitingScreen(questionerName) {
+            updateScoreboards('waitScoreboard');
+            document.getElementById('questionerName').textContent = questionerName;
+            showScreen('waitingForQuestion');
+        }
+
+        function showWaitingForAnswer() {
+            updateScoreboards('waitScoreboard');
+            const guesser = GAME_STATE.players[(GAME_STATE.currentTurn % 2) === 0 ? 1 : 0];
+            document.getElementById('questionerName').textContent = guesser;
+            document.querySelector('#waitingForQuestion .waiting-message p').textContent = 
+                `Waiting for ${guesser} to guess the answer...`;
+            showScreen('waitingForQuestion');
+        }
+
+        function showResultScreen() {
+            const q = GAME_STATE.currentQuestion;
+            updateScoreboards('resultScoreboard');
+            
+            const isCorrect = q.isCorrect;
+            const resultMsg = document.getElementById('resultMessage');
+            
+            if (isCorrect) {
+                resultMsg.textContent = '✓ CORRECT!';
+                resultMsg.className = 'result-message correct';
+            } else {
+                resultMsg.textContent = '✗ INCORRECT!';
+                resultMsg.className = 'result-message incorrect';
+            }
+            
+            document.getElementById('resultQuestion').textContent = q.question;
+            document.getElementById('resultCorrectAnswer').textContent = q.answer;
+            document.getElementById('resultYourGuess').textContent = q.guess || 'No guess';
+            
+            showScreen('showResult');
+        }
+
+        function updateScoreboards(elementId) {
+            const scoreboard = document.getElementById(elementId);
+            if (!scoreboard) return;
+            
+            scoreboard.innerHTML = '';
+            
+            GAME_STATE.players.forEach((player, index) => {
+                const isActive = (GAME_STATE.currentTurn % 2) === index;
+                const score = GAME_STATE.scores[player] || 0;
+                
+                const scoreItem = document.createElement('div');
+                scoreItem.className = 'score-item' + (isActive ? ' active' : '');
+                scoreItem.innerHTML = `
+                    <div class="score-name">${player}${player === GAME_STATE.username ? ' (You)' : ''}</div>
+                    <div class="score-value">${score}</div>
+                `;
+                scoreboard.appendChild(scoreItem);
+            });
+        }
+
+        async function submitQuestion() {
+            const topic = document.getElementById('topicInput').value.trim();
+            const question = document.getElementById('questionInput').value.trim();
+            const answer = document.getElementById('answerInput').value.trim();
+
+            if (!topic || !question || !answer) {
+                alert('Please fill in all fields!');
                 return;
             }
-            alert('Quick match coming soon! Creating a public lobby instead.');
-            createLobby('public');
+
+            if (!window.storage) return;
+
+            try {
+                const lobbyData = await window.storage.get(`brainbattle:${GAME_STATE.lobbyCode}`, true);
+                if (lobbyData && lobbyData.value) {
+                    const lobby = JSON.parse(lobbyData.value);
+                    lobby.currentQuestion = {
+                        topic: topic,
+                        question: question,
+                        answer: answer,
+                        questioner: GAME_STATE.username,
+                        status: 'waiting_answer'
+                    };
+                    await window.storage.set(`brainbattle:${GAME_STATE.lobbyCode}`, JSON.stringify(lobby), true);
+
+                    // Clear inputs
+                    document.getElementById('topicInput').value = '';
+                    document.getElementById('questionInput').value = '';
+                    document.getElementById('answerInput').value = '';
+                }
+            } catch (error) {
+                console.error('Failed to submit question:', error);
+            }
+        }
+
+        async function submitGuess() {
+            const guess = document.getElementById('guessInput').value.trim();
+
+            if (!guess) {
+                alert('Please enter your guess!');
+                return;
+            }
+
+            if (!window.storage) return;
+
+            try {
+                const lobbyData = await window.storage.get(`brainbattle:${GAME_STATE.lobbyCode}`, true);
+                if (lobbyData && lobbyData.value) {
+                    const lobby = JSON.parse(lobbyData.value);
+                    const q = lobby.currentQuestion;
+                    
+                    // Check if correct (case insensitive)
+                    const isCorrect = guess.toLowerCase().trim() === q.answer.toLowerCase().trim();
+                    
+                    q.guess = guess;
+                    q.isCorrect = isCorrect;
+                    q.status = 'answered';
+                    
+                    // Award point if correct
+                    if (isCorrect) {
+                        lobby.scores[GAME_STATE.username] = (lobby.scores[GAME_STATE.username] || 0) + 1;
+                    }
+                    
+                    await window.storage.set(`brainbattle:${GAME_STATE.lobbyCode}`, JSON.stringify(lobby), true);
+                }
+            } catch (error) {
+                console.error('Failed to submit guess:', error);
+            }
+        }
+
+        async function nextRound() {
+            if (!window.storage) return;
+
+            try {
+                const lobbyData = await window.storage.get(`brainbattle:${GAME_STATE.lobbyCode}`, true);
+                if (lobbyData && lobbyData.value) {
+                    const lobby = JSON.parse(lobbyData.value);
+                    
+                    // Move to next turn
+                    lobby.currentTurn = (lobby.currentTurn || 0) + 1;
+                    lobby.roundNumber = Math.floor(lobby.currentTurn / 2) + 1;
+                    lobby.currentQuestion = null;
+                    
+                    await window.storage.set(`brainbattle:${GAME_STATE.lobbyCode}`, JSON.stringify(lobby), true);
+                }
+            } catch (error) {
+                console.error('Failed to advance round:', error);
+            }
+        }
+
+        function showGameOver(winner) {
+            if (gameUpdateInterval) {
+                clearInterval(gameUpdateInterval);
+            }
+
+            document.getElementById('winnerName').textContent = winner;
+            
+            const finalScoresDiv = document.getElementById('finalScores');
+            finalScoresDiv.innerHTML = '';
+            
+            GAME_STATE.players.forEach(player => {
+                const score = GAME_STATE.scores[player] || 0;
+                const card = document.createElement('div');
+                card.className = 'final-score-card' + (player === winner ? ' winner' : '');
+                card.innerHTML = `
+                    <div class="score-name">${player}</div>
+                    <div class="score-value">${score}</div>
+                `;
+                finalScoresDiv.appendChild(card);
+            });
+            
+            showScreen('gameOver');
+        }
+
+        async function playAgain() {
+            if (!window.storage) return;
+
+            try {
+                const lobbyData = await window.storage.get(`brainbattle:${GAME_STATE.lobbyCode}`, true);
+                if (lobbyData && lobbyData.value) {
+                    const lobby = JSON.parse(lobbyData.value);
+                    
+                    // Reset game
+                    lobby.status = 'waiting';
+                    lobby.currentTurn = 0;
+                    lobby.roundNumber = 0;
+                    lobby.currentQuestion = null;
+                    lobby.readyStates = {};
+                    
+                    // Reset scores
+                    GAME_STATE.players.forEach(player => {
+                        lobby.scores[player] = 0;
+                    });
+                    
+                    await window.storage.set(`brainbattle:${GAME_STATE.lobbyCode}`, JSON.stringify(lobby), true);
+                    
+                    GAME_STATE.isReady = false;
+                    showScreen('lobbyWaiting');
+                    updateReadyButton();
+                    startLobbyUpdates();
+                }
+            } catch (error) {
+                console.error('Failed to restart game:', error);
+            }
         }
 
         // ========================================
@@ -1506,8 +1151,7 @@
         // ========================================
         
         window.onload = function() {
-            initCharacterSelect();
-            console.log('TREASURE CHOMPERS - Game Loaded!');
+            console.log('BRAIN BATTLE - Game Loaded!');
         };
     </script>
 </body>
